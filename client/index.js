@@ -18,10 +18,22 @@ import 'file-loader?name=./apple-touch-icon-144x144.png!./img/apple-touch-icon-1
 import 'file-loader?name=./apple-touch-icon-152x152.png!./img/apple-touch-icon-152x152.png';
 import 'file-loader?name=./apple-touch-icon-180x180.png!./img/apple-touch-icon-180x180.png';
 
+import 'raw-loader!./web-app-manifest.json';
+import 'worker-loader?name=./qrwork.js!./qrwork.js';
+import 'worker-loader?name=./sw.js!./sw.js';
+
 ReactDOM.render((<App />), document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept(function () {
     console.log('Accepting the updated printMe module!');
   });
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(registration => {
+    console.log('Registered!');
+  });
+} else {
+  console.log('failed')
 }
