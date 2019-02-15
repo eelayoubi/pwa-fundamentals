@@ -2,7 +2,7 @@
 
 const extractSass = require('./extract-sass');
 
-module.exports = function() {
+module.exports = function () {
   return {
     rules: [
       {
@@ -19,6 +19,15 @@ module.exports = function() {
             }
           }
         ]
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.(json|html)/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'file-loader',
+          options: { name: '[name].[ext]' },
+        }],
       },
       {
         test: /\.scss$/,
