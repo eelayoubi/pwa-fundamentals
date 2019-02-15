@@ -5,7 +5,7 @@ const moduleConfig = require('./webpack/module.config');
 const plugins = require('./webpack/plugins.config');
 const devServer = require('./webpack/devserver.config');
 
-module.exports = function(env) {
+module.exports = function (env) {
   const mode = (env === 'dev') ? 'development' : 'production';
 
   return {
@@ -22,7 +22,8 @@ module.exports = function(env) {
     output: {
       filename: '[name]-[hash].js',
       publicPath: '/',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
+      globalObject: 'this'
     },
     module: moduleConfig(...arguments),
     plugins: plugins(...arguments)
